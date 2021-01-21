@@ -20,16 +20,24 @@ var lightMap = L.tileLayer("https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/
     accessToken: API_KEY
 });
 
+var lightGray = L.tileLayer("https://api.mapbox.com/styles/v1/mapbox/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}", {
+    attribution: "Map data &copy; <a href=\"https://www.openstreetmap.org/\">OpenStreetMap</a> contributors, <a href=\"https://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA</a>, Imagery © <a href=\"https://www.mapbox.com/\">Mapbox</a>",
+    maxZoom: 18,
+    id: "light-v10",
+    accessToken: API_KEY
+});
+
+var satellite = L.tileLayer("https://api.mapbox.com/styles/v1/mapbox/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}", {
+    attribution: "Map data &copy; <a href=\"https://www.openstreetmap.org/\">OpenStreetMap</a> contributors, <a href=\"https://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA</a>, Imagery © <a href=\"https://www.mapbox.com/\">Mapbox</a>",
+    maxZoom: 18,
+    id: "satellite-streets-v11",
+    accessToken: API_KEY
+});
+
 var OpenTopoMap = L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png', {
     maxZoom: 17,
     attribution: 'Map data: &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, <a href="http://viewfinderpanoramas.org">SRTM</a> | Map style: &copy; <a href="https://opentopomap.org">OpenTopoMap</a> (<a href="https://creativecommons.org/licenses/by-sa/3.0/">CC-BY-SA</a>)'
 });
-
-// var Thunderforest_Landscape = L.tileLayer('https://{s}.tile.thunderforest.com/landscape/{z}/{x}/{y}.png?apikey={apikey}', {
-//     attribution: '&copy; <a href="http://www.thunderforest.com/">Thunderforest</a>, &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-//     apikey: '<your apikey>',
-//     maxZoom: 22
-// });
 
 var Esri_WorldImagery = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
     attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
@@ -48,21 +56,62 @@ var darkmap = L.tileLayer("https://api.mapbox.com/styles/v1/mapbox/{id}/tiles/{z
 });
 
 
+var WaymarkedTrails_hiking = L.tileLayer('https://tile.waymarkedtrails.org/hiking/{z}/{x}/{y}.png', {
+    maxZoom: 18,
+    attribution: 'Map data: &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors | Map style: &copy; <a href="https://waymarkedtrails.org">waymarkedtrails.org</a> (<a href="https://creativecommons.org/licenses/by-sa/3.0/">CC-BY-SA</a>)'
+});
+
+var WaymarkedTrails_cycling = L.tileLayer('https://tile.waymarkedtrails.org/cycling/{z}/{x}/{y}.png', {
+    maxZoom: 18,
+    attribution: 'Map data: &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors | Map style: &copy; <a href="https://waymarkedtrails.org">waymarkedtrails.org</a> (<a href="https://creativecommons.org/licenses/by-sa/3.0/">CC-BY-SA</a>)'
+});
+
+var Stamen_TonerBackground = L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/toner-background/{z}/{x}/{y}{r}.{ext}', {
+	attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+	subdomains: 'abcd',
+	minZoom: 0,
+	maxZoom: 20,
+	ext: 'png'
+});
+
+var Stamen_Toner = L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/toner/{z}/{x}/{y}{r}.{ext}', {
+	attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+	subdomains: 'abcd',
+	minZoom: 0,
+	maxZoom: 20,
+	ext: 'png'
+});
+
+var Stamen_TonerLite = L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/toner-lite/{z}/{x}/{y}{r}.{ext}', {
+	attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+	subdomains: 'abcd',
+	minZoom: 0,
+	maxZoom: 20,
+	ext: 'png'
+});
+
+
 // Define baseMaps Object to Hold Base Layers
-// "Forest Landscape": Thunderforest_Landscape,
 var baseMaps = {
+    "Light Gray": lightGray,
     "Light Map": lightMap,
     "Dark Map": darkmap,
+    "Satellite Map": satellite,
     "Topography Map": OpenTopoMap,
     "Esri World Imagery": Esri_WorldImagery,
-    "Esri Ocean Base": Esri_OceanBasemap
+    "Esri Ocean Base": Esri_OceanBasemap,
+    "Toner-Sea w/ Names" : Stamen_Toner,
+    "Toner Background" : Stamen_TonerBackground,
+    "Grey-sea w/ Names" : Stamen_TonerLite
 };
 
 // Create an overlays object to add to the layer control
 var overlays = {
     "Earth Quake Magnitude": WorldEarthquakes,
     "Tectonic Plates": TectoncPlates,
-    "Heat Map": heatLayer
+    "Heat Map": heatLayer,
+    "Hiking Trails": WaymarkedTrails_hiking,
+    "Cycling Map": WaymarkedTrails_cycling
 };
 
 //Create Map and Default layers to display on Load
@@ -75,22 +124,7 @@ var myMap = L.map("map", {
 // Create a control for our layers, add our overlay layers to it
 L.control.layers(baseMaps, overlays).addTo(myMap);
 
-// var WaymarkedTrails_hiking = L.tileLayer('https://tile.waymarkedtrails.org/hiking/{z}/{x}/{y}.png', {
-// 	maxZoom: 18,
-// 	attribution: 'Map data: &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors | Map style: &copy; <a href="https://waymarkedtrails.org">waymarkedtrails.org</a> (<a href="https://creativecommons.org/licenses/by-sa/3.0/">CC-BY-SA</a>)'
-// });
-// var WaymarkedTrails_cycling = L.tileLayer('https://tile.waymarkedtrails.org/cycling/{z}/{x}/{y}.png', {
-// 	maxZoom: 18,
-// 	attribution: 'Map data: &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors | Map style: &copy; <a href="https://waymarkedtrails.org">waymarkedtrails.org</a> (<a href="https://creativecommons.org/licenses/by-sa/3.0/">CC-BY-SA</a>)'
-// });
-// var OpenFireMap = L.tileLayer('http://openfiremap.org/hytiles/{z}/{x}/{y}.png', {
-// 	maxZoom: 19,
-// 	attribution: 'Map data: &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors | Map style: &copy; <a href="http://www.openfiremap.org">OpenFireMap</a> (<a href="https://creativecommons.org/licenses/by-sa/3.0/">CC-BY-SA</a>)'
-// });
-// var OpenRailwayMap = L.tileLayer('https://{s}.tiles.openrailwaymap.org/standard/{z}/{x}/{y}.png', {
-// 	maxZoom: 19,
-// 	attribution: 'Map data: &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors | Map style: &copy; <a href="https://www.OpenRailwayMap.org">OpenRailwayMap</a> (<a href="https://creativecommons.org/licenses/by-sa/3.0/">CC-BY-SA</a>)'
-// });
+
 
 d3.json(queryUrl, function (data) {
 
@@ -98,21 +132,21 @@ d3.json(queryUrl, function (data) {
         color = "red";
         // Conditionals for countries points
         if (element.properties.mag > 6) {
-            color = "#5f0000";
+            color = "#67001f";
         } else if (element.properties.mag > 5) {
-            color = "Maroon";
+            color = "#980043";
         } else if (element.properties.mag > 4) {
-            color = "purple";
+            color = "#ce1256";
         } else if (element.properties.mag > 3) {
-            color = "MediumVioletRed";
+            color = "#e7298a";
         } else if (element.properties.mag > 2) {
-            color = "Fuchsia";
+            color = "#df65b0";
         } else if (element.properties.mag > 1) {
-            color = "Teal";
+            color = "#c994c7";
         } else if (element.properties.mag > 0) {
-            color = "green";
+            color = "#d4b9da";
         } else if (element.properties.mag > -1) {
-            color = "Olive";
+            color = "#e7e1ef";
         }
         //   var geoJsonLayer = 
         // Add circles to map
@@ -120,7 +154,7 @@ d3.json(queryUrl, function (data) {
             fillOpacity: 0.7,
             color: color,
             fillColor: color,
-            radius: element.properties.mag * 3000,
+            radius: element.properties.mag * 6000,
         }).bindPopup(`
         <h2>${element.properties.place}</h2><hr>
         <h4>${new Date(element.properties.time)}</h4>
@@ -144,9 +178,10 @@ d3.json(queryUrl, function (data) {
     })
 
     L.heatLayer(heatArray, {
-        radius: 50,
+        minOpacity: 0.2,
+        radius: 25,
         blur: 15,
-        gradient: {0.1: 'blue', 1: 'red'}
+        gradient: {0.9:'Red', 0.8: '#ff5f00', 0.7: 'Orange', 0.6: 'Yellow', 0.5: 'lime', 0.4: 'Aqua', 0.3: 'DarkBlue', 0.2: 'DarkBlue', 0.1: 'Purple'}
     }).addTo(heatLayer);
     heatLayer.addTo(myMap)
 
@@ -170,7 +205,7 @@ d3.json(queryUrl, function (data) {
         labels = ['<strong>EarthQuake Magnitude</strong>'],
             categories = ['6.0 or greater', '5-5.9', '4-4.9', '3-3.9', '2-2.9', '1-1.9', '0-0.9', '-1-(-0.1)'],
             // colors= ["Maroon", "Purple", "#5f0000", "red", "Fuchsia", "Olive", "Teal", "Green"]"#ff0000"
-            colors = ["#5f0000", "#800000", "#800080", "#af0087", "#ff00ff", "#008080", "#008000", "#808000"];
+            colors = ["#67001f", "#980043", "#ce1256", "#e7298a", "#df65b0", "#c994c7", "#d4b9da", "#e7e1ef"];
         div.innerHTML = ""
         for (var i = 0; i < categories.length; i++) {
 
@@ -193,3 +228,28 @@ d3.json(queryUrl, function (data) {
 
 
 });
+
+/****MY Original Colors**************************************** */
+// data.features.forEach((element) => {
+//     color = "red";
+//     // Conditionals for countries points
+//     if (element.properties.mag > 6) {
+//         color = "#5f0000";
+//     } else if (element.properties.mag > 5) {
+//         color = "Maroon";
+//     } else if (element.properties.mag > 4) {
+//         color = "purple";
+//     } else if (element.properties.mag > 3) {
+//         color = "MediumVioletRed";
+//     } else if (element.properties.mag > 2) {
+//         color = "Fuchsia";
+//     } else if (element.properties.mag > 1) {
+//         color = "Teal";
+//     } else if (element.properties.mag > 0) {
+//         color = "green";
+//     } else if (element.properties.mag > -1) {
+//         color = "Olive";
+//     }
+
+// colors = ["#5f0000", "#800000", "#800080", "#af0087", "#ff00ff", "#008080", "#008000", "#808000"];
+
