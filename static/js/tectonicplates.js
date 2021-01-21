@@ -145,7 +145,8 @@ d3.json(queryUrl, function (data) {
 
     L.heatLayer(heatArray, {
         radius: 50,
-        blur: 15
+        blur: 15,
+        gradient: {0.1: 'blue', 1: 'red'}
     }).addTo(heatLayer);
     heatLayer.addTo(myMap)
 
