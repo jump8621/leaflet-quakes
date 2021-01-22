@@ -210,7 +210,7 @@ d3.json(queryUrl, function (data) {
         for (var i = 0; i < categories.length; i++) {
 
             labels.push(
-                '<div class="circle" style="height:20px; width:20 px; background: ' + (colors[i] ? colors[i] : '+') + '"></div> ' +
+                '<i style="height:20px; width:20 px; background: ' + (colors[i] ? colors[i] : '+') + '"></i>' +
                 (categories[i] ? categories[i] : '+'));
             console.log(categories[i])
             console.log(colors[i])
@@ -219,7 +219,7 @@ d3.json(queryUrl, function (data) {
         div.innerHTML = labels.join('<br>');
         return div;
 
-
+        //style="background:
 
     };
 
